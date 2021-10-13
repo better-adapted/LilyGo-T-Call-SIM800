@@ -1,6 +1,7 @@
 # 1 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino"
 
 
+//http://indispensable.systems/esp32_readings_process.php?MAC=C4:4F:33:53:02:A1&HASH=HASH_TEMP&tank_volume_per=0.00&tank_volume_ml=0&tank_level_mm=0&vend_on_time_ms=300&vend_total_count=0&batt_voltage_nominal=0.00&batt_voltage_vend=0.00&seconds_since_reboot=0&sensor_raw_reading_mm=0&sensor_deadband_mm=0.00&error_message_string=none&tank_height_mm=820&tank_cas_mm2=7698&software_version=ESP32_Ultrasonic_1V00_1V00a_Oct_13_2021_10:28:57
 
 // Please select the corresponding model
 
@@ -17,7 +18,7 @@
 #define DUMP_AT_COMMANDS 
 #define TINY_GSM_DEBUG SerialMon
 
-# 20 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino" 2
+# 21 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino" 2
 
 // Set serial for debug console (to the Serial Monitor, default speed 115200)
 #define SerialMon Serial
@@ -28,10 +29,10 @@
 #define TINY_GSM_MODEM_SIM800 /* Modem is SIM800*/
 #define TINY_GSM_RX_BUFFER 1024 /* Set RX buffer to 1Kb*/
 
-# 31 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino" 2
+# 32 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino" 2
 
 
-# 34 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino" 2
+# 35 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino" 2
 StreamDebugger debugger(Serial1, Serial);
 TinyGsm modem(debugger);
 
@@ -60,7 +61,7 @@ Here we use SD card as a demonstration. In order to maintain versatility,
 I chose three boards with free pins as SPI pins
 
 */
-# 84 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino"
+# 85 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino"
 #define setupSDCard() 
 
 
@@ -198,13 +199,13 @@ public:
  }
 };
 
-const int io_pin_ultrasonic_trigger = 17;
-const int io_pin_ultrasonic_input = 16;
+const int io_pin_ultrasonic_trigger = 32;
+const int io_pin_ultrasonic_input = 33;
 jsn_srt04_tank ultrasonic(io_pin_ultrasonic_trigger, io_pin_ultrasonic_input);
 
 float batt_voltage_nominal=0.0;
 
-String DateString = String("Oct 13 2021") + " " + String("11:10:59");
+String DateString = String("Oct 13 2021") + " " + String("16:55:22");
 String VersionString = "1V00a";
 String ProductString = "ESP32_SVP_1V00";
 
@@ -271,6 +272,21 @@ void loop()
 {
     // Restart takes quite some time
     // To skip it, call init() instead of restart()
+
+    digitalWrite(io_pin_ultrasonic_trigger, 0x1);
+ pinMode(io_pin_ultrasonic_trigger, 0x02);
+ pinMode(io_pin_ultrasonic_input, 0x01);
+ delay(1000);
+
+ for (int x = 0; x < 3; x++)
+ {
+  ultrasonic.take_reading();
+  ultrasonic.print_reading();
+  delay(1000);
+ }
+
+
+
     Serial.println("Initializing modem...");
     modem.restart();
 
@@ -357,7 +373,7 @@ void loop()
     // DTR is used to wake up the sleeping Modem
     // DTR is used to wake up the sleeping Modem
     // DTR is used to wake up the sleeping Modem
-# 451 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino"
+# 467 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino"
     // Make the LED blink three times before going to sleep
     int i = 3;
     while (i--) {
@@ -387,5 +403,5 @@ void loop()
     and the IP5306 consumes about 1mA
 
     */
-# 477 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino"
+# 493 "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino"
 }

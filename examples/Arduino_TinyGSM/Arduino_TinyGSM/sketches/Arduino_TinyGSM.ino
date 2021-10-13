@@ -1,5 +1,6 @@
 
 
+//http://indispensable.systems/esp32_readings_process.php?MAC=C4:4F:33:53:02:A1&HASH=HASH_TEMP&tank_volume_per=0.00&tank_volume_ml=0&tank_level_mm=0&vend_on_time_ms=300&vend_total_count=0&batt_voltage_nominal=0.00&batt_voltage_vend=0.00&seconds_since_reboot=0&sensor_raw_reading_mm=0&sensor_deadband_mm=0.00&error_message_string=none&tank_height_mm=820&tank_cas_mm2=7698&software_version=ESP32_Ultrasonic_1V00_1V00a_Oct_13_2021_10:28:57
 
 // Please select the corresponding model
 
@@ -218,8 +219,8 @@ public:
 	}
 };
 
-const int io_pin_ultrasonic_trigger = 17;
-const int io_pin_ultrasonic_input = 16;
+const int io_pin_ultrasonic_trigger = 32;
+const int io_pin_ultrasonic_input = 33;
 jsn_srt04_tank ultrasonic(io_pin_ultrasonic_trigger, io_pin_ultrasonic_input);
 
 float batt_voltage_nominal=0.0;
@@ -291,6 +292,21 @@ void loop()
 {
     // Restart takes quite some time
     // To skip it, call init() instead of restart()
+	
+    digitalWrite(io_pin_ultrasonic_trigger, HIGH);	
+	pinMode(io_pin_ultrasonic_trigger, OUTPUT);
+	pinMode(io_pin_ultrasonic_input, INPUT);
+	delay(1000);
+	
+	for (int x = 0; x < 3; x++)
+	{		
+		ultrasonic.take_reading();
+		ultrasonic.print_reading();
+		delay(1000);
+	}
+	
+
+	
     SerialMon.println("Initializing modem...");
     modem.restart();
 
@@ -309,7 +325,7 @@ void loop()
     if (strlen(simPIN) && modem.getSimStatus() != 3 ) {
         modem.simUnlock(simPIN);
     }
-
+	
     SerialMon.print("Waiting for network...");
     if (!modem.waitForNetwork(240000L)) {
         SerialMon.println(" fail");
