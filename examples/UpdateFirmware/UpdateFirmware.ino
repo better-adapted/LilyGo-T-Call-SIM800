@@ -1,4 +1,5 @@
 // Please select the corresponding model
+#define SIM800L_IP5306_VERSION_20190610
 
 // #define SIM800L_IP5306_VERSION_20190610
 // #define SIM800L_AXP192_VERSION_20200327

@@ -1,8 +1,17 @@
 build
 .vscode
+.visualgdb
+.vs
+
 bin
 src
 platformio.ini
 lib
+
 .gitignore
 .pio
+*.o
+*.d
+*.cache
+*.a
+*.elf

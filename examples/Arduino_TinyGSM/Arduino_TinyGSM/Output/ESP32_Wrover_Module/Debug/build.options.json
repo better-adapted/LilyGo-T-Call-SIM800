@@ -1,0 +1,11 @@
+{
+  "additionalFiles": "..",
+  "builtInLibrariesFolders": "C:\\Program Files (x86)\\Arduino\\libraries",
+  "builtInToolsFolders": "C:/Program Files (x86)/Arduino/tools-builder,C:\\Users\\adam\\AppData\\Local/Arduino15/packages",
+  "customBuildProperties": "runtime.tools.ctags.path=C:\\Users\\adam\\AppData\\Local\\VisualGDB\\Arduino\\tools-builder\\ctags\\5.8-arduino11",
+  "fqbn": "espressif:esp32:esp32wrover:PartitionScheme=default,FlashMode=qio,FlashFreq=80,UploadSpeed=921600,DebugLevel=none",
+  "hardwareFolders": "C:\\Program Files (x86)\\Arduino\\hardware,C:\\Users\\adam\\Documents\\Arduino\\hardware,C:\\Users\\adam\\AppData\\Local\\Arduino15\\packages",
+  "otherLibrariesFolders": "C:\\Users\\adam\\Documents\\Arduino\\Libraries",
+  "runtime.ide.version": "10600",
+  "sketchLocation": "D:\\SourceTree\\LilyGo-T-Call-SIM800-BA\\examples\\Arduino_TinyGSM\\Arduino_TinyGSM\\sketches\\Arduino_TinyGSM.ino"
+}
